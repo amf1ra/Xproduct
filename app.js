@@ -66,8 +66,36 @@ botonDesplegar.addEventListener('click', () => {
         botonDesplegar.textContent = 'Show less';
     } else {
         contenido.style.display = 'none';
-        botonDesplegar.textContent = 'See more details';
+        botonDesplegar.textContent = 'Show more';
     }
 });
 
 
+
+
+document.getElementById("btn_cont").addEventListener("click", function() {
+    var cont_contact = document.getElementById("cont_contact");
+    cont_contact.classList.toggle("hide");
+});
+
+document.getElementById("mostrarContenido").addEventListener("click", function(e) {
+    e.preventDefault(); // Evita que el enlace se comporte como un enlace normal
+    var contenido = document.getElementById("contenido");
+    contenido.classList.toggle("oculto");
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('contact-form');
+    
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        
+        emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
+            .then(function () {
+                alert('¡El mensaje ha sido enviado con éxito!');
+                form.reset();
+            }, function (error) {
+                console.log('Error al enviar el mensaje:', error);
+            });
+    });
+});
